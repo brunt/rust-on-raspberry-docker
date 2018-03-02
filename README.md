@@ -1,16 +1,9 @@
-[![DockerHub](https://img.shields.io/badge/DockerHub-1.24.0-blue.svg)](https://hub.docker.com/r/ragnaroek/rust-raspberry/)
+[![DockerHub](https://img.shields.io/badge/DockerHub-1.24.0-blue.svg)](https://hub.docker.com/r/ubruntu/rust-raspberry/)
 
-# Updates
-
-Since Rust version `1.23.0` the docker images is based on `Debian stretch`. Please report any issues you have
-with this update in the issue section of this repo.
 
 # Cross compiling with `Docker`
-The native process, as described in https://github.com/Ogeon/rust-on-raspberry-pi, for cross-compiling for the Raspberry Pi sets some environment variables and writes to config files on your host machine. Thus it can be difficult to remember these changes when you want to remove or upgrade the cross compiler or even repeat that process for different versions of rust on the same machine.
 
-To make cross-compiling Rust code for the Raspberry easier you can use the `Docker` image as build from the code in this repository for building your rust code but.
-
-Basically the steps for cross compiling your project with the help of docker look like:
+The steps for cross compiling your project with the help of docker look like:
 
 1. Pulling the `Docker image` from the dockerhub
 2. Running a `Docker container` from that `Docker image` which takes your `rust` project (and it's platform dependencies) and then cross compiles it
@@ -23,7 +16,7 @@ a detailed instruction on how to build the image yourself.
 
 You need to pull the image first from the dockerhub (assuming you have docker installed):
 ```
-docker pull ragnaroek/rust-raspberry:<version>
+docker pull ubruntu/rust-raspberry:<version>
 ```
 where `<version>` is the Rust compiler version. The docker images are provided starting from
 version 1.12.0.
@@ -34,8 +27,7 @@ $ docker run \
     --volume <path to your rust project directory>:/home/cross/project \
     --volume <path to directory containing the platform dependencies>:/home/cross/deb-deps \ # optional, see section "Platform dependencies"
     --volume <path to local cargo registry, e.g. ~/.cargo/registry>:/home/cross/.cargo/registry \ # optional, using cached registry avoids updating on every build
-    ragnaroek/rust-raspberry:<version>
-    <cargo command> # e.g. "build --release"
+    ubruntu/rust-raspberry:<version>
 ```
 
 The compiled project can then be found in your `target` directory.
@@ -66,25 +58,16 @@ If you still can't find it, try searching for the filename online.
 
 ## Building your own Docker image
 ```
-$ git clone https://github.com/Ragnaroek/rust-on-raspberry-docker
+$ git clone https://github.com/ubruntu/rust-on-raspberry-docker
 $ cd rust-on-raspberry-pi/docker
-$ docker build \
-    --build-arg PI_TOOLS_GIT_REF=<branch/tag/commit> \ # defaults to "master"
-    --build-arg RUST_VERSION=<rustup version stable/beta/nightly> \ # defaults to "stable"
-    --tag <tag for your docker image> \ # e.g. "rust-nightly-pi-cross"
-    .
+$ docker build -t rust-raspberry:1.24.0 .
 ```
 
 By setting different tags for your `Docker image` and `RUST_VERSION` you could easily build images for different version of rust and use them as need.
 
 Cross-compiling with your own build image works exactly as with the one pulled from the dockerhub.
-Just replace `ragnaroek/rust-raspberry:<version>` with your own image name.
+Just replace `ubruntu/rust-raspberry:<version>` with your own image name.
 
-## Credits and History
+## Credits
 
-The initial docker image was written by [schnupperboy](https://github.com/schnupperboy) and maintained by [Ogeon](https://github.com/Ogeon/). This repository contains a copy of the docker part that originally
-lived in this repository: https://github.com/Ogeon/rust-on-raspberry-pi
-
-## Support
-
-[![Beerpay](https://beerpay.io/Ragnaroek/rust-on-raspberry-docker/badge.svg?style=beer-square)](https://beerpay.io/Ragnaroek/rust-on-raspberry-docker)  [![Beerpay](https://beerpay.io/Ragnaroek/rust-on-raspberry-docker/make-wish.svg?style=flat-square)](https://beerpay.io/Ragnaroek/rust-on-raspberry-docker?focus=wish)
+I forked this project from https://github.com/ragnaroak/rust-on-raspberry-docker and modified it until it worked for me. My goal was to add a .sh or .bat file to a rust project and use it to run the compile command specifically for the raspberry pi.
