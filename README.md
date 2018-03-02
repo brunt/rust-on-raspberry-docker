@@ -70,4 +70,4 @@ Just replace `ubruntu/rust-raspberry:<version>` with your own image name.
 
 ## Credits
 
-I forked this project from https://github.com/ragnaroak/rust-on-raspberry-docker and modified it until it worked for me. My goal was to add a .sh or .bat file to a rust project and use it to run the compile command specifically for the raspberry pi.
+I forked this project from https://github.com/Ragnaroek/rust-on-raspberry-docker and modified it until it worked for me. My goal was to add a .sh or .bat file to a rust project and use it to run the compile command specifically for the raspberry pi.
