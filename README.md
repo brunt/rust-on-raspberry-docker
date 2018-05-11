@@ -1,4 +1,4 @@
-[![DockerHub](https://img.shields.io/badge/DockerHub-1.24.0-blue.svg)](https://hub.docker.com/r/ubruntu/rust-raspberry/)
+[![DockerHub](https://img.shields.io/badge/DockerHub-1.26.0-blue.svg)](https://hub.docker.com/r/ubruntu/rust-raspberry/)
 
 
 # Cross compiling with `Docker`
@@ -19,7 +19,7 @@ You need to pull the image first from the dockerhub:
 docker pull ubruntu/rust-raspberry:<version>
 ```
 where `<version>` is the Rust compiler version. The docker images are provided starting from
-version 1.24.0.
+version 1.26.0.
 
 If you successfully pulled the `Docker image` containing the cross compiler, you can cross compile your project:
 ```
@@ -60,7 +60,7 @@ If you still can't find it, try searching for the filename online.
 ```
 $ git clone https://github.com/ubruntu/rust-on-raspberry-docker
 $ cd rust-on-raspberry-pi/docker
-$ docker build -t rust-raspberry:1.24.0 .
+$ docker build -t rust-raspberry:1.26.0 .
 ```
 
 By setting different tags for your `Docker image` and `RUST_VERSION` you can easily build images for different versions of rust and use them as needed.
